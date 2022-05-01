@@ -24,17 +24,17 @@ while len(guessed_names) < len(div_names):
     if not answer:
         break
     answer = answer.title()
-    if answer in guessed_names:
-        continue
     matched = match(answer)
     if matched.empty:
         print("Wrong")
     else:
-        guessed_names.append(answer)
-        t = turtle.Turtle()
-        t.hideturtle()
+        div_name = matched.division.item()
+        if div_name in guessed_names:
+            continue
+        guessed_names.append(div_name)
+        t = turtle.Turtle(visible=False)
         t.penup()
         t.goto(int(matched.x), int(matched.y))
-        t.write(matched.division.item(), font=("Arial", 10, "bold"))
+        t.write(div_name, font=("Arial", 10, "bold"))
 
 turtle.mainloop()
